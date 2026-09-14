@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chunxiao Wang — Portfolio</title>
+<meta name="description" content="Chunxiao (Tracy) Wang — Digital Humanities MPhil, Trinity College Dublin. Cultural heritage, game studies, and data-driven research.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500&display=swap');
+
+:root{
+  --bg:#FFFFFF;
+  --ink:#111111;
+  --ink-soft:#4A4A4A;
+  --ink-faint:#8E8E8E;
+  --line:#111111;
+  --line-soft:#DCDCDC;
+  --accent:#EA4C8D;
+  --panel:#111111;
+  --panel-text:#FFFFFF;
+  --font:'Oswald',sans-serif;
+  --font-sans:'IBM Plex Sans',-apple-system,sans-serif;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--font-sans);line-height:1.6;}
+a{color:inherit;}
+::selection{background:var(--accent);color:#fff;}
+
+.skip-link{position:absolute;left:-9999px;top:0;background:var(--ink);color:#fff;padding:10px 16px;z-index:100;}
+.skip-link:focus{left:12px;top:12px;}
+
+/* ---------- shell layout ---------- */
+.shell{display:grid;grid-template-columns:240px 1fr;min-height:100vh;}
+.rail{position:sticky;top:0;height:100vh;overflow-y:auto;border-right:4px solid var(--ink);padding:28px 22px;background:var(--bg);}
+.rail-name{font-family:var(--font);font-weight:700;font-size:20px;text-transform:uppercase;letter-spacing:0.01em;margin:0 0 2px;}
+.rail-role{font-size:12px;color:var(--ink-soft);margin:0 0 28px;line-height:1.5;}
+.rail nav{display:flex;flex-direction:column;gap:2px;}
+.rail nav a{display:block;font-family:var(--font);font-size:13px;font-weight:500;color:var(--ink-soft);text-decoration:none;padding:7px 0;border-bottom:1px solid transparent;}
+.rail nav a:hover, .rail nav a:focus-visible{color:var(--ink);}
+.rail nav a.featured{color:var(--accent);}
+.rail-group-label{font-size:10px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.08em;margin:18px 0 4px;}
+.rail-group-label:first-of-type{margin-top:0;}
+.rail-links{margin-top:26px;padding-top:18px;border-top:1px solid var(--line-soft);display:flex;flex-direction:column;gap:8px;}
+.rail-links a{font-size:12px;color:var(--ink-soft);text-decoration:none;}
+.rail-links a:hover{color:var(--accent);}
+
+.main{min-width:0;}
+
+/* mobile top bar (hidden on desktop) */
+.mobile-bar{display:none;}
+
+/* ---------- masthead ---------- */
+.masthead{padding:56px 48px 40px;border-bottom:4px solid var(--ink);}
+.masthead h1{font-family:var(--font);font-weight:700;font-size:52px;text-transform:uppercase;letter-spacing:0.01em;margin:0 0 10px;}
+.masthead p.tagline{font-size:17px;color:var(--ink-soft);max-width:560px;margin:0 0 20px;line-height:1.6;}
+.masthead .meta{display:flex;gap:28px;flex-wrap:wrap;}
+.masthead .meta div{font-size:11px;color:var(--ink-soft);font-family:var(--font);font-weight:500;text-transform:uppercase;letter-spacing:0.06em;}
+.masthead .meta b{display:block;color:var(--ink);font-weight:600;font-family:var(--font-sans);text-transform:none;font-size:14px;letter-spacing:0;margin-top:3px;}
+
+/* ---------- generic section ---------- */
+.section{padding:48px;border-bottom:1px solid var(--line-soft);}
+.section-head{margin-bottom:28px;}
+.section-head h2{font-family:var(--font);font-weight:600;font-size:26px;text-transform:uppercase;letter-spacing:0.01em;margin:0 0 8px;}
+.section-head p{color:var(--ink-soft);max-width:640px;margin:0;font-size:14px;}
+
+/* about */
+.about-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:40px;}
+.about-grid p{margin:0 0 14px;font-size:15px;}
+.about-grid ul{margin:0 0 14px;padding-left:18px;font-size:14px;color:var(--ink-soft);}
+.skills-cols{display:grid;grid-template-columns:1fr 1fr;gap:20px 28px;}
+.skills-cols h3{font-family:var(--font);font-size:12px;text-transform:uppercase;letter-spacing:0.05em;margin:0 0 8px;color:var(--accent);}
+.skills-cols p{font-size:13px;color:var(--ink-soft);margin:0;line-height:1.7;}
+
+/* research feature */
+.research{background:var(--panel);color:var(--panel-text);}
+.research .section-head p{color:#C9C9C9;}
+.research-card{display:grid;grid-template-columns:1fr 1fr;gap:36px;align-items:start;}
+.research-card h3{font-family:var(--font);font-size:24px;font-weight:600;margin:0 0 12px;line-height:1.25;}
+.research-card p{font-size:14px;color:#D8D8D8;margin:0 0 14px;}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:20px;}
+.stat{border:1px solid #333;padding:14px 12px;}
+.stat b{display:block;font-family:var(--font);font-size:26px;font-weight:600;color:var(--accent);}
+.stat span{font-size:11px;color:#AFAFAF;text-transform:uppercase;letter-spacing:0.04em;}
+.coding-tags{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.coding-tags span{border:1px solid #3A3A3A;padding:4px 10px;font-size:11px;color:#CFCFCF;}
+.btn{display:inline-flex;align-items:center;gap:8px;font-family:var(--font);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:0.04em;text-decoration:none;padding:11px 20px;border:1px solid var(--ink);color:var(--ink);}
+.btn:hover{background:var(--ink);color:#fff;}
+.research .btn{border-color:var(--accent);color:var(--accent);}
+.research .btn:hover{background:var(--accent);color:#111;}
+
+/* records list (project entries) */
+.record{display:grid;grid-template-columns:170px 130px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line-soft);}
+.record:first-of-type{border-top:none;}
+.record-meta{font-size:11px;color:var(--ink-faint);text-transform:uppercase;letter-spacing:0.05em;line-height:1.9;}
+.record-meta .kind{display:inline-block;color:var(--accent);border:1px solid var(--accent);padding:2px 8px;margin-bottom:8px;font-weight:600;}
+.record-thumb{display:block;}
+.record-thumb img{width:100%;height:150px;object-fit:cover;object-position:top;border:1px solid var(--ink);display:block;background:#fff;}
+.record-thumb figcaption{font-size:10px;color:var(--ink-faint);margin-top:6px;text-transform:uppercase;letter-spacing:0.04em;}
+.record-body h3{font-family:var(--font);font-size:19px;font-weight:600;margin:0 0 8px;text-transform:none;letter-spacing:0;}
+.record-body p{font-size:14px;color:var(--ink-soft);margin:0 0 12px;max-width:680px;}
+.record-links{display:flex;gap:16px;flex-wrap:wrap;}
+.record-links a{font-size:12px;font-weight:600;text-decoration:none;color:var(--ink);border-bottom:1px solid var(--ink);padding-bottom:1px;}
+.record-links a.demo{color:var(--accent);border-color:var(--accent);}
+.record-links a:hover{opacity:0.6;}
+
+/* footer / contact */
+.contact{padding:56px 48px;background:var(--bg);}
+.contact h2{font-family:var(--font);font-weight:700;font-size:30px;text-transform:uppercase;margin:0 0 16px;}
+.contact-links{display:flex;gap:28px;flex-wrap:wrap;margin-bottom:8px;}
+.contact-links a{font-size:14px;font-weight:600;text-decoration:none;border-bottom:1px solid var(--ink);}
+.contact-links a:hover{color:var(--accent);border-color:var(--accent);}
+.contact-foot{font-size:12px;color:var(--ink-faint);margin-top:36px;}
+
+/* ---------- responsive ---------- */
+@media (max-width: 880px){
+  .shell{grid-template-columns:1fr;}
+  .rail{display:none;}
+  .mobile-bar{display:flex;position:sticky;top:0;z-index:20;background:var(--bg);border-bottom:4px solid var(--ink);overflow-x:auto;padding:14px 16px;gap:18px;white-space:nowrap;}
+  .mobile-bar a{font-family:var(--font);font-size:12px;font-weight:600;text-transform:uppercase;color:var(--ink-soft);text-decoration:none;}
+  .mobile-bar a.featured{color:var(--accent);}
+  .masthead{padding:36px 22px 28px;}
+  .masthead h1{font-size:36px;}
+  .section{padding:34px 22px;}
+  .about-grid{grid-template-columns:1fr;gap:24px;}
+  .research-card{grid-template-columns:1fr;}
+  .stat-row{grid-template-columns:1fr 1fr;}
+  .record{grid-template-columns:1fr;gap:8px;}
+  .record-thumb{order:-1;margin-bottom:6px;}
+  .record-thumb img{height:180px;}
+}
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="mobile-bar" aria-label="Section navigation">
+  <a href="#about">About</a>
+  <a class="featured" href="#research">Research</a>
+  <a href="#interactive">Interactive</a>
+  <a href="#data">Data &amp; Code</a>
+  <a href="#writing">Writing</a>
+  <a href="#curriculum">Curriculum</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<div class="shell">
+  <aside class="rail">
+    <p class="rail-name">Chunxiao Wang</p>
+    <p class="rail-role">MPhil Digital Humanities &amp; Culture<br>Trinity College Dublin</p>
+    <nav aria-label="Section navigation">
+      <a href="#about">About</a>
+      <a class="featured" href="#research">Research</a>
+      <p class="rail-group-label">Projects</p>
+      <a href="#interactive">Interactive projects</a>
+      <a href="#data">Data &amp; computational</a>
+      <a href="#writing">Critical writing</a>
+      <a href="#curriculum">Curriculum design</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="rail-links">
+      <a href="http://www.linkedin.com/in/chunxiao-wang-2a0b86385" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="https://github.com/chunxiaow82-collab" target="_blank" rel="noopener">GitHub ↗</a>
+    </div>
+  </aside>
+
+  <main class="main" id="main">
+    <header class="masthead">
+      <h1>Chunxiao Wang</h1>
+      <p class="tagline">Digital Humanities researcher working across cultural heritage, game studies, and data — building interactive archives and asking what gets counted, coded, and left out.</p>
+      <div class="meta">
+        <div>Based in<b>Dublin, Ireland</b></div>
+        <div>Studying<b>MPhil Digital Humanities &amp; Culture, Trinity College Dublin</b></div>
+        <div>Background<b>BA Chinese Language &amp; Literature</b></div>
+      </div>
+    </header>
+
+    <section class="section" id="about">
+      <div class="section-head">
+        <h2>About</h2>
+      </div>
+      <div class="about-grid">
+        <div>
+          <p>I'm an MPhil student in Digital Humanities and Culture at Trinity College Dublin, coming from a background in Chinese Language and Literature. My work sits at the intersection of technology and the humanities — cultural heritage, game studies, and the facilities and institutions that hold culture in the first place.</p>
+          <p>Before this degree I worked across operations support, customer service, event coordination, and digital content production, which is part of why I care as much about how a project actually gets used as how it's designed.</p>
+          <ul>
+            <li>Research &amp; writing: text analysis, interdisciplinary research, critical writing</li>
+            <li>Interests: cultural heritage, game studies, facilities &amp; cultural institutions</li>
+          </ul>
+        </div>
+        <div class="skills-cols">
+          <div>
+            <h3>Digital &amp; research</h3>
+            <p>Data analysis, textual analysis, document management, curriculum development, Python scripting</p>
+          </div>
+          <div>
+            <h3>Operations &amp; facilities</h3>
+            <p>Customer service, event setup &amp; coordination, operational workflow support</p>
+          </div>
+          <div>
+            <h3>Media &amp; content</h3>
+            <p>New media content production, video &amp; photo editing, social media management</p>
+          </div>
+          <div>
+            <h3>Software</h3>
+            <p>Python, OpenRefine, LancsBox, Gephi, CapCut, GitHub</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section research" id="research">
+      <div class="section-head">
+        <h2>Featured research</h2>
+        <p>MPhil dissertation work in progress</p>
+      </div>
+      <div class="research-card">
+        <div>
+          <h3>Reading romance at scale: player voices across three otome games</h3>
+          <p>For my dissertation, I built a corpus of player reviews for three romance-focused games — Hakuoki: Kyoto Winds, Monster Prom, and Love and Deepspace — pulled from Steam, the App Store, and Google Play, then stripped of identifying information and normalised into one shared structure across platforms and languages.</p>
+          <p>Steam's recommend / not recommend judgements and App Store / Google Play star ratings become a baseline sentiment signal, which I pair with a qualitative coding framework covering narrative form, romance structure, gameplay structure, emotional response, and player agency — so the numbers and the close reading check each other rather than standing alone.</p>
+        </div>
+        <div>
+          <div class="stat-row">
+            <div class="stat"><b>42,067</b><span>Reviews collected</span></div>
+            <div class="stat"><b>3</b><span>Games studied</span></div>
+            <div class="stat"><b>3</b><span>Platforms</span></div>
+            <div class="stat"><b>4</b><span>Languages</span></div>
+          </div>
+          <div class="coding-tags">
+            <span>Narrative form</span><span>Romance structure</span><span>Gameplay structure</span><span>Emotional response</span><span>Agency &amp; constraint</span>
+          </div>
+          <figure class="record-thumb" style="width:130px;margin:0 0 20px;">
+            <img src="assets/thumbs/dissertation-appendices.png" alt="First page of the dissertation appendices" loading="lazy" style="border-color:#3A3A3A;">
+            <figcaption style="color:#9A9A9A;">Appendices, p.1</figcaption>
+          </figure>
+          <a class="btn" href="assets/pdfs/dissertation-appendices.pdf" target="_blank" rel="noopener">Read the appendices (PDF)</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="interactive">
+      <div class="section-head">
+        <h2>Interactive projects</h2>
+        <p>Two finished, playable pieces — built end to end, from concept and content to interface.</p>
+      </div>
+
+      <div class="record">
+        <div class="record-meta"><span class="kind">Live demo</span><br>GLAM · interactive fiction<br>Built in Twine</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/silk-road-shot.png" alt="Opening screen of the Voices of the Silk Road interactive" loading="lazy">
+          <figcaption>Opening screen</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Voices of the Silk Road</h3>
+          <p>An interactive narrative set on Xi'an's Huimin Jie (Muslim Quarter). Players choose between three perspectives — a Hui resident, a Central Asian merchant in the 8th-century Tang dynasty, and a present-day scholar — that branch apart and then converge on a shared ending. The structure is built around Authorized Heritage Discourse (Smith, 2006) and Transmedia Storytelling (Jenkins, 2003), as a way of making room for voices that official heritage narratives tend to leave out.</p>
+          <div class="record-links">
+            <a class="demo" href="projects/silk-road-interactive.html" target="_blank" rel="noopener">Play the interactive ↗</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta"><span class="kind">Live demo</span><br>Personal project<br>Metadata &amp; UX design</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/wardrobe-archive-shot.png" alt="The Wardrobe Archive interface, showing filters for category, season, occasion and colour" loading="lazy">
+          <figcaption>Archive interface</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>The Wardrobe Archive</h3>
+          <p>A personal digital asset catalog for 64 garment items. I defined the metadata scheme and controlled vocabulary, designed the UX requirements — faceted search, annotated detail views, iterative visual direction — and then directed an AI coding assistant through three rounds of build and revision based on usability feedback.</p>
+          <div class="record-links">
+            <a class="demo" href="projects/wardrobe-archive.html" target="_blank" rel="noopener">Open the archive ↗</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="data">
+      <div class="section-head">
+        <h2>Data &amp; computational projects</h2>
+        <p>Corpus tools, network analysis, and data management practice — the hands-on side of digital humanities.</p>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">DH software exercise<br>LancsBox X · Gephi</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/lancsbox-gephi-arcane.png" alt="Gephi character-relationship network for Arcane, showing the Zaun and Piltover factions" loading="lazy">
+          <figcaption>Gephi network</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Corpus stylistics: Dickens vs. Austen, and a character network in Arcane</h3>
+          <p>Used LancsBox's KWIC and GraphColl tools to compare how Dickens and Austen use the word "family" — in Dickens it clusters with class and control, in Austen with stability and marriage prospects — then built a Gephi network graph mapping character relationships and factions across the two rival districts in Arcane.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/lancsbox-gephi-corpus-analysis.pdf" target="_blank" rel="noopener">Read the write-up (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Course methodology<br>Python · spaCy · NLTK</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/game-walkthrough-narrative-analysis.png" alt="First page of the game walkthrough narrative analysis methodology paper" loading="lazy">
+          <figcaption>Methodology paper</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Analyzing narrative structure in game walkthroughs</h3>
+          <p>A methodology for building a small corpus of text-based game walkthroughs and using computational text analysis — tokenisation, rule-based and POS-based classification — to test whether narrative description and gameplay instruction behave as distinct, identifiable modes of writing.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/game-walkthrough-narrative-analysis.pdf" target="_blank" rel="noopener">Read the methodology (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Data management plan<br>Individual exercise</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/data-management-plan.png" alt="First page of the data description and management plan assignment" loading="lazy">
+          <figcaption>Assignment brief</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Evaluating a handwriting-recognition dataset and an open cultural-facilities dataset</h3>
+          <p>A comparative data description and management plan for two very different datasets: a 361-image handwriting-detection collection, and South Dublin County Council's open data on local libraries, museums, and cultural facilities — covering data quality, cleaning needs, and a GDPR-aware storage plan.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/data-management-plan.pdf" target="_blank" rel="noopener">Read the plan (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Group project<br>Python · Voyant Tools · Excel</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/ai-adoption-jobloss-group-project.png" alt="First page of the group project statement on AI adoption and job loss" loading="lazy">
+          <figcaption>Project statement</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Does media sentiment about AI match real job-loss trends?</h3>
+          <p>With two teammates, I compared U.S. media sentiment toward AI in the retail and marketing industries — drawn from ProQuest articles and analysed with Python and Voyant Tools — against actual AI adoption and unemployment data. The rate of unemployment didn't track AI adoption growth the way the media narrative suggested.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/ai-adoption-jobloss-group-project.pdf" target="_blank" rel="noopener">Read the report (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="writing">
+      <div class="section-head">
+        <h2>Critical writing</h2>
+        <p>Essays on games, archives, and platforms — reading digital culture through Digital Humanities frameworks.</p>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Essay<br>Game studies · GLAM</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/valete-vos-viatores-essay.png" alt="First page of the Gamifying the Past essay" loading="lazy">
+          <figcaption>Essay, p.1</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Gamifying the past: GLAM engagement in Valete Vos Viatores</h3>
+          <p>An analysis of a Latin-epigraphy educational game built with European heritage institutions, looking at how its procedural, task-based design turns Roman inscription culture into a playable system — and where that formalises a field of practice that was historically far more fluid and contested.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/valete-vos-viatores-essay.pdf" target="_blank" rel="noopener">Read the essay (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Essay<br>Digital archives · feminist DH</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/full-stack-feminism-essay.png" alt="First page of the Full Stack Feminism essay" loading="lazy">
+          <figcaption>Essay, p.1</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Reconstructing digital archives through Full Stack Feminism</h3>
+          <p>A case study of the History of Women in Science digital archive, read through Full Stack Feminism's three-layer framework — data, infrastructure, and interface — to examine how feminist values can be built into a collection's design rather than added on afterwards.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/full-stack-feminism-essay.pdf" target="_blank" rel="noopener">Read the essay (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Essay<br>AI ethics · gender</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/gendered-intimacy-ai-companions.png" alt="First page of the gendered intimacy in AI companion systems essay" loading="lazy">
+          <figcaption>Essay, p.1</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>The construction of gendered intimacy in AI companion systems</h3>
+          <p>An analysis of how AI companion platforms like Replika combine probabilistic language generation with feminized interactional design to produce a co-produced sense of intimacy — and what that reveals about emotional labour, user projection, and platform power.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/gendered-intimacy-ai-companions.pdf" target="_blank" rel="noopener">Read the essay (PDF)</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="record">
+        <div class="record-meta">Short assignment<br>Platform studies</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/tiktok-hidden-system.png" alt="Diagram showing the technical, human, and power affordances behind a TikTok like" loading="lazy">
+          <figcaption>Full diagram</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>The hidden system behind a TikTok "like"</h3>
+          <p>A short breakdown of what happens — technically and socially — the moment a user taps "like": from engagement data, to algorithmic processing, to platform value, and the human and power dynamics running underneath.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/tiktok-hidden-system.pdf" target="_blank" rel="noopener">View the slide (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="curriculum">
+      <div class="section-head">
+        <h2>Curriculum design</h2>
+        <p>Turning a dataset of existing courses into a proposal for a new one.</p>
+      </div>
+      <div class="record">
+        <div class="record-meta">Data-driven design<br>Python co-occurrence analysis</div>
+        <figure class="record-thumb">
+          <img src="assets/thumbs/new-minor-subject-curriculum.png" alt="First page of the New Minor Subject Digital Humanities curriculum proposal" loading="lazy">
+          <figcaption>Curriculum doc, p.1</figcaption>
+        </figure>
+        <div class="record-body">
+          <h3>Designing a new Digital Humanities minor</h3>
+          <p>I built a dataset of DH modules taught across universities in Ireland, the UK, Europe, and the US, then used Python to find co-occurrence patterns between technologies (Python, NLP, GIS, metadata) and disciplines. Those patterns — text-based methods clustering with literary studies, GIS clustering with history and heritage — shaped a four-year minor that moves from foundational concepts, to applied methods, to critical engagement with AI and data ethics.</p>
+          <div class="record-links">
+            <a href="assets/pdfs/new-minor-subject-curriculum.pdf" target="_blank" rel="noopener">Read the proposal (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="contact" id="contact">
+      <h2>Get in touch</h2>
+      <div class="contact-links">
+        <a href="http://www.linkedin.com/in/chunxiao-wang-2a0b86385" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/chunxiaow82-collab" target="_blank" rel="noopener">GitHub</a>
+      </div>
+      <p class="contact-foot">Chunxiao (Tracy) Wang — Dublin, Ireland</p>
+    </footer>
+  </main>
+</div>
+</body>
+</html>
